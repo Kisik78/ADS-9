@@ -2,6 +2,7 @@
 #ifndef INCLUDE_BST_H_
 #define INCLUDE_BST_H_
 #include <cassert>
+
 template <typename T>
   class BST {
    public:
