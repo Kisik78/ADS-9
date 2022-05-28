@@ -11,7 +11,8 @@ template <typename T>
       Vertex* left;
       Vertex* right;
     };
-  private:
+    
+   private:
     Vertex* root;
     Vertex* addVertex(Vertex* root, T value) {
       if (root == nullptr) {
@@ -46,7 +47,8 @@ template <typename T>
       else
         return root->uni;
     }
-  public:
+    
+   public:
     BST() :root(nullptr) {}
     ~BST() {}
     void add(T value) {
