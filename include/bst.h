@@ -11,7 +11,7 @@ template <typename T>
       Vertex* left;
       Vertex* right;
     };
-    
+ 
    private:
     Vertex* root;
     Vertex* addVertex(Vertex* root, T value) {
@@ -34,7 +34,7 @@ template <typename T>
         return 0;
       if (root->left == nullptr && root->right == nullptr)
         return 0;
-      int but = deepTree(root->left), lat = deepTree(root->right);
+      int but = deepTree(root->left), lut = deepTree(root->right);
       return (but > lut ? but : lut) + 1;
     }
     int searchNode(Vertex* root, T value) {
@@ -47,7 +47,7 @@ template <typename T>
       else
         return root->uni;
     }
-    
+
    public:
     BST() :root(nullptr) {}
     ~BST() {}
