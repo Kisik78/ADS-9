@@ -4,26 +4,27 @@
 #include  <locale>
 #include  <cstdlib>
 #include  "bst.h"
+
 BST<std::string> makeTree(const char* filename) {
-  BST<std::string>tr;
+  BST<std::string>tree;
   std::string word = "";
-  char lc = 'a' - 'A';
+  char lowercase = 'a' - 'A';
   std::ifstream file(filename);
   if (!file) {
     std::cout << "Error!" << std::endl;
-    return tr;
+    return tree;
   }
   while (!file.eof()) {
-    char mr = file.get();
-    if ((mr >= 'a' && mr <= 'z') || (mr >= 'A' && mr <= 'Z')) {
-      if (mr >= 'A' && mr <= 'Z')
-        mr += lc;
-      word += mr;
+    char ch = file.get();
+    if ((ch >= 'a' && ch <= 'z') || (ch >= 'A' && ch <= 'Z')) {
+      if (ch >= 'A' && ch <= 'Z')
+        ch += lowercase;
+      word += ch;
     } else if (word != "") {
-      tr.add(word);
+      tree.add(word);
       word = "";
     }
   }
   file.close();
-  return tr;
+  return tree;
 }
