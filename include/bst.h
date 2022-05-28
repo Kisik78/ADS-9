@@ -2,43 +2,42 @@
 #ifndef INCLUDE_BST_H_
 #define INCLUDE_BST_H_
 #include <cassert>
-
 template <typename T>
   class BST {
    public:
-    struct Vertex {
+    struct Node {
       T value;
-      int uni;
-      Vertex* left;
-      Vertex* right;
+      int count;
+      Node* left;
+      Node* right;
     };
- 
+
    private:
-    Vertex* root;
-    Vertex* addVertex(Vertex* root, T value) {
+    Node* root;
+    Node* addNode(Node* root, T value) {
       if (root == nullptr) {
-        root = new Vertex;
+        root = new Node;
         root->value = value;
-        root->uni = 1;
+        root->count = 1;
         root->left = root->right = nullptr;
       } else if (root->value > value) {
-        root->left = addVertex(root->left, value);
+        root->left = addNode(root->left, value);
       } else if (root->value < value) {
-        root->right = addVertex(root->right, value);
+        root->right = addNode(root->right, value);
       } else {
-        root->uni++;
+        root->count++;
       }
       return root;
     }
-    int deepTree(Vertex* root) {
+    int depthTree(Node* root) {
       if (root == nullptr)
         return 0;
       if (root->left == nullptr && root->right == nullptr)
         return 0;
-      int but = deepTree(root->left), lut = deepTree(root->right);
-      return (but > lut ? but : lut) + 1;
+      int lh = depthTree(root->left), rh = depthTree(root->right);
+      return (lh > rh ? lh : rh) + 1;
     }
-    int searchNode(Vertex* root, T value) {
+    int searchNode(Node* root, T value) {
       if (root == nullptr)
         return 0;
       else if (root->value > value)
@@ -46,20 +45,20 @@ template <typename T>
       else if (root->value < value)
         return searchNode(root->right, value);
       else
-        return root->uni;
+        return root->count;
     }
 
    public:
     BST() :root(nullptr) {}
     ~BST() {}
     void add(T value) {
-      root = addVertex(root, value);
+      root = addNode(root, value);
     }
-    int deep() {
-      return deepTree(root);
+    int depth() {
+      return depthTree(root);
     }
     int search(T value) {
-      return searchVertex(root, value);
+      return searchNode(root, value);
     }
   };
 
